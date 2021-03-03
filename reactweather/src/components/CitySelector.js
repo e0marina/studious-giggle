@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { Row, Col, FormControl, Button } from 'react-bootstrap';
-import { API_KEY, API_BASE_URL } from '../config';
 
 
-function CitySelector() {
+const CitySelector = ({ onSearch }) => {
     const [city, setCity] = useState('');
-    const [results, setResults] = useState(null);
 
-    const onSearch = () => {
-        fetch(`${API_BASE_URL}/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`)
-            .then((response) => response.json())
-            .then((result) => console.log(result));
-    }
     return (
         <div>
             <Row>
@@ -36,7 +29,7 @@ function CitySelector() {
             <Row>
                 <Col>
                     {/* event handler for button click */}
-                    <Button onClick={onSearch}>Check Weather</Button>
+                    <Button onClick={() => onSearch(city)}>Check Weather</Button>
                 </Col>
             </Row>
 
